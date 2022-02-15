@@ -1,20 +1,10 @@
+"use strict";
+
 const todoControl = document.querySelector(".todo-control");
 const headerInput = document.querySelector(".header-input");
 const todoList = document.querySelector(".todo-list");
 const todoCompleted = document.querySelector(".todo-completed");
-let toDoData = [];
-
-const todoLoad = function () {
-  let result = JSON.parse(localStorage.getItem("toDoData"));
-
-  if (result == null) {
-    result = [];
-  }
-
-  return result;
-};
-
-toDoData = todoLoad();
+const toDoData = JSON.parse(localStorage.getItem("toDoData")) || [];
 
 const render = function () {
   todoList.innerHTML = "";
@@ -34,11 +24,10 @@ const render = function () {
 
     if (item.completed) {
       todoCompleted.append(li);
-      localStorage.clear();
+      // localStorage.clear();
       localStorage.setItem("toDoData", JSON.stringify(toDoData));
     } else {
       todoList.append(li);
-      localStorage.clear();
       localStorage.setItem("toDoData", JSON.stringify(toDoData));
     }
     li.querySelector(".todo-complete").addEventListener("click", function () {
@@ -46,8 +35,7 @@ const render = function () {
       render();
     });
     li.querySelector(".todo-remove").addEventListener("click", function () {
-      toDoData.splice(toDoData.index, 1);
-      localStorage.clear();
+      toDoData.splice(index, 1);
       localStorage.setItem("toDoData", JSON.stringify(toDoData));
       headerInput.value = "";
       render();
@@ -61,10 +49,10 @@ todoControl.addEventListener("submit", function (event) {
     text: headerInput.value,
     completed: false,
   };
-  if (headerInput.value !== "") {
+  if (headerInput.value.trim() !== "") {
     toDoData.push(newToDo);
-    localStorage.clear();
-    localStorage.setItem(toDoData, JSON.stringify(toDoData));
+    // localStorage.clear();
+    localStorage.setItem("toDoData", JSON.stringify(toDoData));
   } else {
     alert("добавить пустое дело нельзя, введите текст");
   }
