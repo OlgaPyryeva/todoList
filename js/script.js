@@ -24,7 +24,6 @@ const render = function () {
 
     if (item.completed) {
       todoCompleted.append(li);
-      // localStorage.clear();
       localStorage.setItem("toDoData", JSON.stringify(toDoData));
     } else {
       todoList.append(li);
@@ -51,7 +50,6 @@ todoControl.addEventListener("submit", function (event) {
   };
   if (headerInput.value.trim() !== "") {
     toDoData.push(newToDo);
-    // localStorage.clear();
     localStorage.setItem("toDoData", JSON.stringify(toDoData));
   } else {
     alert("добавить пустое дело нельзя, введите текст");
