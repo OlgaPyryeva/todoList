@@ -13,14 +13,13 @@ const render = function () {
   toDoData.forEach(function (item, index) {
     const li = document.createElement("li");
     li.classList.add("todo-item");
-    li.innerHTML =
-      '<span class="text-todo">' +
-      item.text +
-      "</span>" +
-      '<div class="todo-buttons">' +
-      '<button class="todo-remove"></button>' +
-      '<button class="todo-complete"></button>' +
-      "</div>";
+    li.innerHTML = `<span class="text-todo"> 
+      ${item.text} 
+      </span> 
+      <div class="todo-buttons"> 
+      <button class="todo-remove"></button> 
+      <button class="todo-complete"></button> 
+      </div>`;
 
     if (item.completed) {
       todoCompleted.append(li);
